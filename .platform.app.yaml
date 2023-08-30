@@ -1,0 +1,39 @@
+name: keycloak
+
+type: 'java:17'
+disk: 2048
+
+variables:
+    env:
+        VERSION: 22.0.1
+        KC_DB: mariadb
+        KC_HTTP_ENABLED: true
+        KC_PROXY: edge
+
+hooks:
+    build: |
+        set -e
+        curl -L -o https://github.com/keycloak/keycloak/releases/download/$VERSION/keycloak-$VERSION.tar.gz
+        tar -zxvf keycloak-$VERSION.tar.gz
+        mv keycloak-$VERSION/* .
+        rm keycloak-$VERSION.tar.gz
+        bin/kc.sh build --db mariadb
+
+relationships:
+  db: 'db:mysql'
+
+web:
+  upstream:
+    socket_family: tcp
+    protocol: http
+  commands:
+    start: |
+      bin/kc.sh start
+  locations:
+    /:
+      passthru: true
+
+mounts:
+  data:
+    source: local
+    source_path: data
