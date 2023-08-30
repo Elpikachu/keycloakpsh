@@ -12,7 +12,9 @@ export KC_DB_PASSWORD=${DB_PASSWORD}
 export KC_HOSTNAME=`echo $PLATFORM_ROUTES | base64 -d | jq -r 'to_entries | map_values(.value + { slug: .key }) | .[] | select(.primary == true) | .slug' | sed -e 's;https://;;' -e 's;/$;;'`
 export KC_HOSTNAME_ADMIN=admin.${KC_HOSTNAME}
 
+export KC_HTTP_ENABLED=true
 export KC_HTTP_PORT=${PORT}
+export KC_PROXY=edge
 
 export KEYCLOAK_ADMIN=admin
 export KEYCLOAK_ADMIN_PASSWORD=admin

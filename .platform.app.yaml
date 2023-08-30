@@ -6,13 +6,17 @@ disk: 2048
 variables:
     env:
         VERSION: 22.0.1
-        KC_HTTP_ENABLED: true
-        KC_PROXY: edge
 
 hooks:
     build: |
         set -e
-        curl -L -o keycloak-$VERSION.tar.gz https://github.com/keycloak/keycloak/releases/download/$VERSION/keycloak-$VERSION.tar.gz
+        if [ ! -f "$PLATFORM_CACHE_DIR/keycloak-$VERSION.tar.gz" ]; then
+            echo "Archive not in cache, downloading it"
+            curl -L -o keycloak-$VERSION.tar.gz https://github.com/keycloak/keycloak/releases/download/$VERSION/keycloak-$VERSION.tar.gz
+        else
+            echo "File already in cache, using it"
+            cp $PLATFORM_CACHE_DIR/keycloak-$VERSION.tar.gz .
+        fi
         tar -zxvf keycloak-$VERSION.tar.gz
         mv keycloak-$VERSION/* .
         rm keycloak-$VERSION.tar.gz
