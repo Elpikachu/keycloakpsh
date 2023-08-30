@@ -10,6 +10,7 @@ variables:
 hooks:
     build: |
         set -e
+        echo "Looking for archive in $PLATFORM_CACHE_DIR/keycloak-$VERSION.tar.gz"
         if [ ! -f "$PLATFORM_CACHE_DIR/keycloak-$VERSION.tar.gz" ]; then
             echo "Archive not in cache, downloading it"
             curl -L -o keycloak-$VERSION.tar.gz https://github.com/keycloak/keycloak/releases/download/$VERSION/keycloak-$VERSION.tar.gz
