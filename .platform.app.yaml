@@ -6,7 +6,6 @@ disk: 2048
 variables:
     env:
         VERSION: 22.0.1
-        KC_DB: mariadb
         KC_HTTP_ENABLED: true
         KC_PROXY: edge
 

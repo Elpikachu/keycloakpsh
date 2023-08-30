@@ -4,7 +4,8 @@ export DB_PATH=`echo $PLATFORM_RELATIONSHIPS|base64 -d|json_pp| jq -r ".db[0].pa
 export DB_USER=`echo $PLATFORM_RELATIONSHIPS|base64 -d|json_pp| jq -r ".db[0].username"`
 export DB_PASSWORD=`echo $PLATFORM_RELATIONSHIPS|base64 -d|json_pp| jq -r ".db[0].password"`
 
-export KC_DB_URL_HOST=jdbc:mariadb://${DB_HOST}:${DB_PORT}/${DB_PATH}
+export KC_DB=mariadb
+export KC_DB_URL=jdbc:mariadb://${DB_HOST}:${DB_PORT}/${DB_PATH}
 export KC_DB_USERNAME=${DB_USER}
 export KC_DB_PASSWORD=${DB_PASSWORD}
 
