@@ -13,7 +13,7 @@ variables:
 hooks:
     build: |
         set -e
-        curl -L -o https://github.com/keycloak/keycloak/releases/download/$VERSION/keycloak-$VERSION.tar.gz
+        curl -L -o keycloak-$VERSION.tar.gz https://github.com/keycloak/keycloak/releases/download/$VERSION/keycloak-$VERSION.tar.gz
         tar -zxvf keycloak-$VERSION.tar.gz
         mv keycloak-$VERSION/* .
         rm keycloak-$VERSION.tar.gz
