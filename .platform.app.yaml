@@ -14,6 +14,7 @@ hooks:
         if [ ! -f "$PLATFORM_CACHE_DIR/keycloak-$VERSION.tar.gz" ]; then
             echo "Archive not in cache, downloading it"
             curl -L -o keycloak-$VERSION.tar.gz https://github.com/keycloak/keycloak/releases/download/$VERSION/keycloak-$VERSION.tar.gz
+            cp keycloak-$VERSION.tar.gz $PLATFORM_CACHE_DIR/
         else
             echo "File already in cache, using it"
             cp $PLATFORM_CACHE_DIR/keycloak-$VERSION.tar.gz .
